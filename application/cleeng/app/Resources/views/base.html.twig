@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-select.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/popper.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap-select.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+</head>
+<body>
+
+{{ render(controller('AppBundle:ForTwigView\\HeaderFooter:getHeader', { 'parentRequest': app.request })) }}
+
+<div class="container">
+{% block content %}{% endblock %}
+{% block fos_user_content %}{% endblock %}
+</div>
+{% block javascripts %}{% endblock %}
+{{ render(controller('AppBundle:ForTwigView\\HeaderFooter:getFooter', { 'parentRequest': app.request })) }}
+</body>
+</html>
+
+

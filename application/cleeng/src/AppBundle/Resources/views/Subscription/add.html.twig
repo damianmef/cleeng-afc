@@ -1,0 +1,60 @@
+{# @var variables \AppBundle\Model\ProcessResponseObject #}
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if variables.add.status and variables.add.msg is not empty %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ variables.add.msg }}
+        </div>
+    {% endif %}
+
+    {% if not variables.add.status and variables.add.msg is not empty %}
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{ variables.add.msg }}
+        </div>
+    {% endif %}
+
+    <h2>Add subscription</h2>
+    <div class="table-responsive-sm">
+        <form class="form-horizontal form-add-reservation" method="post" data-parsley-validate="" novalidate="">
+            <div class="form-group">
+                <label for="subscription-name" class="control-label">Name</label>
+                <div class="">
+                    <input id="subscription-name" class="form-control" name="subscription-name"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="subscription-title" class="control-label">Title</label>
+                <div class="">
+                    <input id="subscription-title" class="form-control" name="subscription-title"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="subscription-parent" class="control-label">Parent</label>
+                <div class="">
+                    <select id="subscription-parent" class="selectpicker select-picker" name="subscription-parent" required="" data-parsley-required="true">
+                        <option value="0">No parent</option>
+                        {% for item in variables.items.data.items %}
+                            <option value="{{ item.id }}">{{ item.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <a class="btn btn-secondary" href="{{ path('subscription_list') }}">Back</a>
+                    </div>
+                    <div class="col-6">
+                        <button class="float-right btn btn-success my-2 my-sm-0">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

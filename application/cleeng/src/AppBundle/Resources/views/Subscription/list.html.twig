@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h2>Subscriptions list <a href="{{ path('subscription_add') }}" class="btn btn-success float-right">Add new</a></h2>
+    <div class="table-responsive-sm">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Title</th>
+                <th scope="col">Parent</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in variables.data.items %}
+                <tr data-delete-row-id="{{ item.id }}">
+                    <th>{{ loop.index }}</th>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{% if variables.data.items[item.parent] is defined %}{{ variables.data.items[item.parent].title }}{% else %} - {% endif %}</td>
+                    <td>
+                        <a href="{{ path('subscription_edit', { id: item.id }) }}" class="btn btn-primary">Edit</a>
+                        <button type="button" class="btn btn-danger btn-modal" data-id="{{ item.id }}" data-title="{{ item.title }}" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Remove video</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure to remove Video "<span data-delete-title=""></span>"?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-delete-id="">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var DELETE_URL = '{{ path('subscription_delete', { id:0 }) }}';
+    </script>
+{% endblock %}
+

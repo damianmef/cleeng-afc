@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+  cleeng-web:
+      build: ./config/dockerfiles/nginx
+      image: cleeng/nginx-php
+      volumes:
+          - ./../application/cleeng:/var/www/vhosts/cleeng
+          - ./config/nginx-cleeng.conf:/etc/nginx/conf.d/site.conf
+          - ./config/custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      links:
+          - cleeng-php
+      container_name: cleeng-web
+      networks:
+          cleeng-net:
+            ipv4_address: 170.16.140.15
+      restart: on-failure:10
+  cleeng-php:
+      build: ./config/dockerfiles/php
+      image: cleeng/dev-php
+      volumes:
+          - ./../application/cleeng:/var/www/vhosts/cleeng
+          - /etc/localtime:/etc/localtime
+          - ./usr/share/nodejs:/usr/share/nodejs
+          - ./node_modules:/usr/share/node_modules
+      container_name: cleeng-php
+      links:
+          - cleeng-redis
+      environment:
+          XDEBUG_CONFIG: remote_host=170.16.140.1
+          ROUTE_PREFIX: ''
+      working_dir: /var/www/vhosts/cleeng/
+      networks:
+          - cleeng-net
+      restart: on-failure:10
+  cleeng-postgres:
+      image: postgres:9.6
+      container_name: cleeng-postgres
+      volumes:
+           - ./postgres:/home/cleeng
+           - ./postgres/db:/var/lib/postgresql/data
+      environment:
+        - POSTGRES_USER=pony
+        - POSTGRES_PASSWORD=pony
+        - POSTGRES_DB=pony
+      networks:
+          cleeng-net:
+            ipv4_address: 170.16.140.17
+  cleeng-redis:
+      image: redis:latest
+      container_name: cleeng-redis
+      networks:
+          cleeng-net:
+            ipv4_address: 170.16.140.20
+      restart: on-failure:10
+
+networks:
+  cleeng-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 170.16.140.0/24
+        gateway: 170.16.140.1

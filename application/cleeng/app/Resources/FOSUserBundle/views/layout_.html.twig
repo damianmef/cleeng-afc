@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<form action="/login_check" method="post">
+    <input type="hidden" name="_csrf_token" value="AHR5IV-7JDUnvo-vgdlByIVuECSkRAmpgwHZgY1-4Sk" />
+
+    <label for="username">security.login.username</label>
+    <input type="text" id="username" name="_username" value="{% if last_username is defined %}{{ last_username }}{% endif %}" required="required" autocomplete="username" />
+
+    <label for="password">security.login.password</label>
+    <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">security.login.remember_me</label>
+
+    <input type="submit" id="_submit" name="_submit" value="security.login.submit" />
+</form>
+{% endblock %}

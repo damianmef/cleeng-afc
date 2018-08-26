@@ -1,0 +1,34 @@
+
+{# @var form \Symfony/Component/Form/FormView.php #}
+
+
+{% trans_default_domain 'FOSUserBundle' %}
+{#{{ dump(form) }}#}
+{#{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}#}
+{##}
+{#{{ form_end(form) }}#}
+<h1 class="text-center">Register to AFC</h1>
+<form name="fos_user_registration_form" method="post" action="{{ path('fos_user_registration_register') }}" class="fos_user_registration_register row">
+    <div id="fos_user_registration_form" class="col-6 offset-3">
+        <div class="form-group">
+            <label for="fos_user_registration_form_email" class="required">Email</label>
+            <input type="email" class="form-control" id="fos_user_registration_form_email" name="fos_user_registration_form[email]" required="required">
+        </div>
+        <div class="form-group">
+            <label for="fos_user_registration_form_username" class="required">Username</label>
+            <input type="text" class="form-control" id="fos_user_registration_form_username" name="fos_user_registration_form[username]" required="required" maxlength="180" pattern=".{2,}">
+        </div>
+        <div class="form-group">
+            <label for="fos_user_registration_form_plainPassword_first" class="required">Password</label>
+            <input type="password" class="form-control" id="fos_user_registration_form_plainPassword_first" name="fos_user_registration_form[plainPassword][first]" required="required" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+            <label for="fos_user_registration_form_plainPassword_second" class="required">Password confirmation</label>
+            <input type="password" class="form-control" id="fos_user_registration_form_plainPassword_second" name="fos_user_registration_form[plainPassword][second]" required="required" autocomplete="new-password">
+        </div>
+        <input type="hidden" id="fos_user_registration_form__token" name="fos_user_registration_form[_token]" value="{{ form.children._token.vars.value }}">
+        <div>
+            <input type="submit" value="Send" class="btn btn-block" />
+        </div>
+    </div>
+</form>

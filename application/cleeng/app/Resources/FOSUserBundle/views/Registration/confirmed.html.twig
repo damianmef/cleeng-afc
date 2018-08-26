@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div id="fos_user_registration_form" class="col-6 offset-3">
+    <h1 class="text-center">Thank you for register in AFC!</h1>
+    {% if targetUrl %}
+        <a class="btn btn-outline-secondary btn-block" href="{{ path('homepage') }}">Go to main page</a>
+    {% endif %}
+    </div>
+{% endblock fos_user_content %}

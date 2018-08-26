@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <h1 class="text-center">Welcome to Application For Cleeng (AFC)!</h1>
+
+        <div class="jumbotron shadow">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav flex-column">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#intro">1. My solution to the task</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#docker">2. Docker containers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#schemas">3. Schemas - database, class diagram</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#functions">4. Application functions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#postman">5. Postman</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="jumbotron shadow" id="intro">
+            <h2 class="text-center">My solution to the task</h2>
+            <ul>
+                <li>- Docker containers: PHP, Nginx, postgres, redis</li>
+                <li>- Symfony 3.4 (Bundles)</li>
+                <li>- Symfony API build on services (OOP)</li>
+                <li>- Example of API usage: AFC</li>
+                <li>- Postman for API requests</li>
+                <li>- UnitPHP Tests for few functionalities</li>
+
+            </ul>
+        </div>
+
+
+        <div class="jumbotron shadow text-center" id="docker">
+            <h2 class="text-center">Docker containers</h2>
+            <img class="img-fluid" src="/img/containers.jpg"/>
+            <img class="img-fluid" src="/img/dockerps.jpg"/>
+        </div>
+        <div class="jumbotron shadow text-center" id="schemas">
+            <h2 class="text-center">Schemas - database, class diagram</h2>
+
+
+            <h3 class="mt-5 mb-5">DB structure</h3>
+            <img class="img-fluid" src="/img/db.png"/>
+            <h3 class="mt-5 mb-5">Class diagram</h3>
+            <img class="img-fluid" src="/img/class-diagram.jpeg"/>
+        </div>
+
+
+        <div class="jumbotron shadow" id="functions">
+            <h2 class="text-center">Application functions</h2>
+            <label>Security levels</label>
+            <ul>
+                <li>
+                    <ul>
+                        <li>- no user
+                            <a target="_blank" href="/">/</a>
+                            <a target="_blank" href="{{ path('fos_user_registration_register') }}">/registration</a>
+                            <a target="_blank" href="{{ path('fos_user_security_login') }}">/login</a>
+                        </li>
+                        <li>- user
+                            <a target="_blank" href="{{ path('user_videos') }}">/videos</a>
+                            <a target="_blank" href="{{ path('user_video', {id: 0}) }}">/video</a>
+                            <a target="_blank" href="{{ path('user_subscription') }}">/subscription</a>
+                        </li>
+                        <li>- admin
+                            <a target="_blank" href="{{ path('video_list') }}">/admin/video/</a>
+                            <a target="_blank" href="{{ path('subscription_list') }}">/admin/subscriptions/</a>
+                            <a target="_blank" href="{{ path('user_list') }}">/admin/users</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <label>User</label>
+            <ul>
+                <li>- Register, login</li>
+                <li>- List of videos</li>
+                <li>- Buy subscription</li>
+            </ul>
+            <label>Admin</label>
+            <ul>
+                <li>- Register, login</li>
+                <li>- User: remove</li>
+                <li>- Video: add, edit, remove</li>
+                <li>- Subscription: add, edit, remove</li>
+            </ul>
+        </div>
+
+        <div class="jumbotron shadow text-center" id="postman">
+            <h2 class="text-center">API in Postman</h2>
+            <a href="https://www.getpostman.com/collections/2b95b03745831a937a8e">https://www.getpostman.com/collections/2b95b03745831a937a8e</a>
+        </div>
+
+        <div class="jumbotron shadow">
+            <blockquote class="blockquote">
+                <h1 class="text-center">Talk is cheap. Show me the code.</h1>
+                <footer class="blockquote-footer text-right">Linus Torvalds
+                </footer>
+            </blockquote>
+        </div>
+
+    </div>
+
+{% endblock %}
+

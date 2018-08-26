@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="/">AFC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            {% if isUser %}
+                {% if isAdmin %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('user_list') }}"><span>Users</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  href="{{ path('video_list') }}"><span>Videos</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="{{ path('subscription_list') }}">Subscriptions Plans</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('user_videos') }}"><span>My videos</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('user_subscription') }}"><span>Subscription</span></a>
+                </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+        <div class="form-inline mt-2 mt-md-0">
+            {% if isUser %}
+                <span class="text-white mr-3">{{ username }}{% if isAdmin %} (admin){% endif %}</span>
+                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</a>
+            {% else %}
+                <a href="{{ path('fos_user_security_login') }}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</a>
+                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-outline-success my-2 ml-2 my-sm-0" type="submit">Registration</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>

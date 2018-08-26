@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {% if user.subscriptionType is empty %}
+        <h1 class="text-center">You have no subscription</h1>
+    {% endif %}
+    <h2>Subscriptions list</h2>
+        <div class="row">
+            {% for item in variables.data.items %}
+                <div class="col-4">
+                    <div class="card bg-light">
+                        <div class="card-header">{{ item.title }}</div>
+                        <div class="card-body">
+                            <form method="post">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <input type="hidden" name="subscription-id" value="{{ item.id }}">
+                                <button class="btn btn-block btn-primary" {% if user.subscriptionType == item.id %}disabled{% endif %}>Buy</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+
+{% endblock %}
+

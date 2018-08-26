@@ -1,0 +1,21 @@
+{# @var variables \AppBundle\Model\ProcessResponseObject #}
+{# @var user \AppBundle\Entity\User #}
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {% if video.status is empty %}
+        <h1>You have no permission here</h1>
+    {% else %}
+        <object width="100%" height="515"
+                data="{{ video.data.items.0.url }}">
+        </object>
+    {% endif %}
+    <div class="row">
+        <div class="col-12">
+            <a class="btn btn-secondary" href="{{ path('user_videos') }}">Back to my videos</a>
+        </div>
+    </div>
+{% endblock %}
+
